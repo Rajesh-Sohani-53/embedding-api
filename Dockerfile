@@ -10,13 +10,14 @@ RUN pip install --no-cache-dir torch==2.0.1 --index-url https://download.pytorch
 RUN pip install --no-cache-dir sentence-transformers fastapi uvicorn
 
 # Copy your app
-WORKDIR /app
-COPY . /app
+WORKDIR /main
+COPY . /main
 
 # Expose port (Railway expects 8000)
 EXPOSE 8000
 
 # Run API on port 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
 
 

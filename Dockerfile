@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install requirements (torch + transformers)
+# Install requirements
 RUN pip install --no-cache-dir torch==2.0.1 --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir sentence-transformers fastapi uvicorn
 
@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir sentence-transformers fastapi uvicorn
 WORKDIR /app
 COPY . /app
 
-# Expose port
-EXPOSE 8080
+# Expose port (Railway expects 8000)
+EXPOSE 8000
 
-# Run API
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run API on port 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
